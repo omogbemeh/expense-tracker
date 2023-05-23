@@ -8,10 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,6 +40,12 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -42,31 +54,31 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
