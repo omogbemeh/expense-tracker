@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -28,4 +31,10 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private User createdBy;
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime updatedAt;
 }
