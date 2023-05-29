@@ -1,4 +1,4 @@
-package codes.praise.expensetracker.model;
+package codes.praise.expensetracker.transaction;
 
 public enum TransactionType {
     CREDIT,

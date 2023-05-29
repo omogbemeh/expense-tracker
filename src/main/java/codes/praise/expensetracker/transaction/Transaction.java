@@ -1,5 +1,7 @@
-package codes.praise.expensetracker.model;
+package codes.praise.expensetracker.transaction;
 
+import codes.praise.expensetracker.transaction.TransactionType;
+import codes.praise.expensetracker.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class Transaction {
     private TransactionType transactionType;
     @ManyToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User createdBy;
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

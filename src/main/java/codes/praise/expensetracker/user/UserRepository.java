@@ -1,9 +1,12 @@
-package codes.praise.expensetracker.repository;
+package codes.praise.expensetracker.user;
 
-import codes.praise.expensetracker.model.User;
+import codes.praise.expensetracker.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
 }
