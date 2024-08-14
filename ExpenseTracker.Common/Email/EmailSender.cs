@@ -1,18 +1,34 @@
+using System.Net;
+using System.Net.Mail;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
 
 namespace ExpenseTracker.Common.Email;
 
 public class EmailSender : IEmailSender
 {
-    private readonly EmailService _emailService;
+    private readonly EmailSettings _emailSettings;
 
-    public EmailSender(EmailService emailService)
+    public EmailSender(IOptions<EmailSettings> emailSettings)
     {
-        _emailService = emailService;
+        this._emailSettings = emailSettings.Value;
     }
-    
-    public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+
+    public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        await this._emailService.SendEmailAsync(email, subject, htmlMessage);
+        MailMessage mailMessage = new MailMessage
+        {
+            From = new MailAddress(_emailSettings.FromEmail),
+            Subject = subject,
+            Body = message,
+            IsBodyHtml = true
+        };
+        
+        mailMessage.To.Add(new MailAddress(toEmail));
+
+        using var client = new SmtpClient(_emailSettings.SmtpServer, _emailSettings.SmtpPort);
+        client.Credentials = new NetworkCredential(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword);
+
+        await client.SendMailAsync(mailMessage);
     }
 }

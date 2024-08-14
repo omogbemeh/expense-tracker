@@ -1,0 +1,15 @@
+*[b-hs0p5gjh7x],
+*[b-hs0p5gjh7x]::before,
+*[b-hs0p5gjh7x]::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container[b-hs0p5gjh7x]{
+    min-width: 100vw;
+    min-height: 100vh;
+    background: green;
+    display: grid;
+    place-items: center;
+}

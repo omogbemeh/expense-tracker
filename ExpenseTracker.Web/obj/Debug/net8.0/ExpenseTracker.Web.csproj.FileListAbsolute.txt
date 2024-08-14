@@ -290,3 +290,5 @@
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Web/bin/Debug/net8.0/appsettings.json
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Web/bin/Debug/net8.0/ExpenseTracker.Common.dll
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Web/bin/Debug/net8.0/ExpenseTracker.Common.pdb
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Web/obj/Debug/net8.0/ExpenseTracker.Web.sourcelink.json
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Web/obj/Debug/net8.0/scopedcss/Views/Shared/_AuthLayout.cshtml.rz.scp.css

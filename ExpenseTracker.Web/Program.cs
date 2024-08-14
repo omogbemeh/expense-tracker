@@ -29,11 +29,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.ExpireTimeSpan = TimeSpan.FromDays(7);
     options.SlidingExpiration = true;
+    // options.LoginPath = "/Account/Login";
 });
 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("SMTP"));
-builder.Services.AddSingleton<IEmailService, EmailService>();
-builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddControllersWithViews();
 

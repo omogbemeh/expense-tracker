@@ -1,3 +1,19 @@
+/* _content/ExpenseTracker.Web/Views/Shared/_AuthLayout.cshtml.rz.scp.css */
+*[b-hs0p5gjh7x],
+*[b-hs0p5gjh7x]::before,
+*[b-hs0p5gjh7x]::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container[b-hs0p5gjh7x]{
+    min-width: 100vw;
+    min-height: 100vh;
+    background: green;
+    display: grid;
+    place-items: center;
+}
 /* _content/ExpenseTracker.Web/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

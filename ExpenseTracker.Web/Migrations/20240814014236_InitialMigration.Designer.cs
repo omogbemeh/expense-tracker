@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240814003523_UpdateApplicationSchema")]
-    partial class UpdateApplicationSchema
+    [Migration("20240814014236_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

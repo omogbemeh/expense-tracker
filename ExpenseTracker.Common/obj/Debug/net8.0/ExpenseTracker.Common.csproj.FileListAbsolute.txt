@@ -10,3 +10,4 @@
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/refint/ExpenseTracker.Common.dll
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.pdb
 /Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ref/ExpenseTracker.Common.dll
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.sourcelink.json
