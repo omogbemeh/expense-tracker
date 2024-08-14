@@ -2,6 +2,8 @@ using ExpenseTracker.Common.Email;
 using ExpenseTracker.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using ExpenseTracker.Web.Data;
+using ExpenseTracker.Web.Interfaces;
+using ExpenseTracker.Web.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +34,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     // options.LoginPath = "/Account/Login";
 });
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("SMTP"));
 
 builder.Services.AddControllersWithViews();

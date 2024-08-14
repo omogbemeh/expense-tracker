@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240814014236_InitialMigration")]
+    [Migration("20240814044221_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
