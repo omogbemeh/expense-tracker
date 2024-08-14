@@ -1,0 +1,12 @@
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/bin/Debug/net8.0/ExpenseTracker.Common.deps.json
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/bin/Debug/net8.0/ExpenseTracker.Common.dll
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/bin/Debug/net8.0/ExpenseTracker.Common.pdb
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.csproj.AssemblyReference.cache
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.AssemblyInfoInputs.cache
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.AssemblyInfo.cs
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.csproj.CoreCompileInputs.cache
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.dll
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/refint/ExpenseTracker.Common.dll
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ExpenseTracker.Common.pdb
+/Users/praise/Projects/ExpenseTracker/ExpenseTracker.Common/obj/Debug/net8.0/ref/ExpenseTracker.Common.dll
