@@ -30,9 +30,8 @@ public class TransactionService : ITransactionService
 
     }
 
-    public async Task<decimal> SumTransactions(List<Transaction> transactions)
+    public decimal SumTransactions(List<Transaction> transactions)
     {
-        if (transactions.Count <= 0) return 0m;
-        return transactions.Sum(t => t.TransactionType == TransactionTypeEnum.Credit ? t.Amount : - t.Amount );
+        return transactions.Count <= 0 ? 0m : transactions.Sum(t => t.TransactionType == TransactionTypeEnum.Credit ? t.Amount : - t.Amount );
     }
 }

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using ExpenseTracker.Core.Entities;
+using ExpenseTracker.Web.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using ExpenseTracker.Web.Models;
 using ExpenseTracker.Web.Services;
@@ -12,10 +13,10 @@ namespace ExpenseTracker.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly TransactionService _transactionService;
+    private readonly ITransactionService _transactionService;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public HomeController(ILogger<HomeController> logger, TransactionService transactionService, UserManager<ApplicationUser> userManager)
+    public HomeController(ILogger<HomeController> logger, ITransactionService transactionService, UserManager<ApplicationUser> userManager)
     {
         _logger = logger;
         _transactionService = transactionService;
@@ -27,19 +28,30 @@ public class HomeController : Controller
         try
         {
             var user = await _userManager.GetUserAsync(User);
-            
+
             if (user == null)
             {
                 return RedirectToPage("/Identity/Account/Login");
             }
-            
+
             var transactions = await _transactionService.GetTransactionsByUserIdAsync(user.Id);
-            return View(transactions);
+            var sumOfTransactionsForTheWeek = _transactionService.SumTransactions(transactions);
+
+            return View(new HomeViewModel
+            { 
+                CurrentWeeklyTransaction = sumOfTransactionsForTheWeek,
+                Transactions = transactions.Count > 0 ? transactions : new List<Transaction>()
+            });
         }
         catch (Exception e)
-        {   _logger.LogError(e, "An error occured while retrieving transactions");
+        {   
+            _logger.LogError(e, "An error occured while retrieving transactions");
             TempData["ErrorMessage"] = "Something went wrong while retrieving transactions";
-            return View(new List<Transaction>());
+            return View(new HomeViewModel
+            {
+                CurrentWeeklyTransaction = 0m,
+                Transactions = new List<Transaction>()
+            });
         }
     }
 
