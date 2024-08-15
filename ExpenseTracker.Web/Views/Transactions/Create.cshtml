@@ -1,5 +1,43 @@
+@model CreateTransactionViewModel
 
 @{
 }
 
 <h1>Add Transaction</h1>
+<form action="">
+    <div>
+        <label for="">Amount</label>
+        <input type="text">
+    </div>
+    <div>
+        <label for="">Transaction type</label>
+        <select name="" id="">
+            <option value="">Select a Transaction Type</option>
+        </select>
+    </div>
+    <div>
+        <label for="">Category</label>
+        <select name="" id="">
+            <option value="">Select a Category</option>
+            @if (Model.Categories.Count > 0)
+            {
+                @foreach (var category in Model.Categories)
+                {
+                <option value=@category.Id>@category.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <label for="">Date</label>
+        <input type="date">
+    </div>
+    <div>
+        <label for="">Notes</label>
+        <input type="text">
+    </div>
+    <div>
+        <button>Submit</button>
+        <button>Reset form</button>
+    </div>
+</form>

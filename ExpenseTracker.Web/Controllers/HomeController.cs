@@ -16,7 +16,11 @@ public class HomeController : Controller
     private readonly ITransactionService _transactionService;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public HomeController(ILogger<HomeController> logger, ITransactionService transactionService, UserManager<ApplicationUser> userManager)
+    public HomeController(
+        ITransactionService transactionService, 
+        ILogger<HomeController> logger, 
+        UserManager<ApplicationUser> userManager, 
+        ICategoryService categoryService)
     {
         _logger = logger;
         _transactionService = transactionService;
@@ -34,8 +38,8 @@ public class HomeController : Controller
                 return RedirectToPage("/Identity/Account/Login");
             }
 
-            var transactions = await _transactionService.GetTransactionsByUserIdAsync(user.Id);
-            var sumOfTransactionsForTheWeek = _transactionService.SumTransactions(transactions);
+            List<Transaction> transactions = await _transactionService.GetTransactionsByUserIdAsync(user.Id);
+            decimal sumOfTransactionsForTheWeek = _transactionService.SumTransactions(transactions);
 
             return View(new HomeViewModel
             { 

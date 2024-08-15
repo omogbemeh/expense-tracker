@@ -19,7 +19,8 @@ public class TransactionService : ITransactionService
     {
         try
         {
-            var duration = DateTime.UtcNow.AddDays(-days);
+            var currDayOfWeek = DateTime.UtcNow.DayOfWeek;
+            var duration = DateTime.UtcNow.AddDays(- (int) currDayOfWeek);
             var transactions = await _context.Transactions.Where(t => t.CreatedBy == userId && t.CreatedAt >= duration).ToListAsync();
             return transactions;
         }
