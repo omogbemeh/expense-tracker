@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240815054204_AddCategoriesTable")]
-    partial class AddCategoriesTable
+    [Migration("20240815063915_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,35 +24,6 @@ namespace ExpenseTracker.Web.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ExpenseTracker.Core.Entities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Emoji")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
 
             modelBuilder.Entity("ExpenseTracker.Core.Entities.Transaction", b =>
                 {
@@ -74,6 +45,9 @@ namespace ExpenseTracker.Web.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("TransactionCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("TransactionType")
                         .HasColumnType("int");
 
@@ -83,6 +57,8 @@ namespace ExpenseTracker.Web.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
+
+                    b.HasIndex("TransactionCategoryId");
 
                     b.ToTable("Transactions");
                 });
@@ -348,7 +324,15 @@ namespace ExpenseTracker.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ExpenseTracker.Core.Entities.TransactionCategory", "TransactionCategory")
+                        .WithMany("Transactions")
+                        .HasForeignKey("TransactionCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("TransactionCategory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -400,6 +384,11 @@ namespace ExpenseTracker.Web.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ExpenseTracker.Core.Entities.TransactionCategory", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("ExpenseTracker.Core.Entities.ApplicationUser", b =>

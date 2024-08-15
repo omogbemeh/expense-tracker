@@ -13,15 +13,15 @@ public class CategoryService : ICategoryService
         this._context = _context;
     }
 
-    public async Task<List<Category>> GetCategoriesAsync()
+    public async Task<List<TransactionCategory>> GetCategoriesAsync()
     {
         try
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.TransactionCategories.ToListAsync();
         }
         catch (Exception e)
         {
-            return new List<Category>();
+            return new List<TransactionCategory>();
             throw;
         }
     }

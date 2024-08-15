@@ -20,7 +20,7 @@ public class TransactionsController: Controller
     {
         try
         {
-            List<Category> categories = await _categoryService.GetCategoriesAsync();
+            List<TransactionCategory> categories = await _categoryService.GetCategoriesAsync();
             CreateTransactionViewModel createTransactionViewModel = new CreateTransactionViewModel
             {
                 Categories = categories,
@@ -30,7 +30,7 @@ public class TransactionsController: Controller
         catch (Exception e)
         {
             _logger.LogError(e, "Something went wrong fetching Categories");
-            return View(new CreateTransactionViewModel { Categories = new List<Category>() });
+            return View(new CreateTransactionViewModel { Categories = new List<TransactionCategory>() });
         }
     }
 }

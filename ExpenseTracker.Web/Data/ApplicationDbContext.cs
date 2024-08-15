@@ -13,7 +13,6 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<TransactionCategory> TransactionCategories { get; set; }
-    public DbSet<Category> Categories { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -32,5 +31,11 @@ public class ApplicationDbContext : IdentityDbContext
             .WithMany(u => u.Transactions)
             .HasForeignKey(t => t.CreatedBy)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Transaction>()
+            .HasOne<TransactionCategory>(t => t.TransactionCategory)
+            .WithMany(c => c.Transactions)
+            .HasForeignKey(t => t.TransactionCategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

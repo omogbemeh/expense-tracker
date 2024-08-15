@@ -11,4 +11,6 @@ public class TransactionCategory : BaseEntity
     public string DisplayName { get; set; }
     public string? Description { get; set; } = string.Empty;
     public string? Emoji { get; set; }
+
+    public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

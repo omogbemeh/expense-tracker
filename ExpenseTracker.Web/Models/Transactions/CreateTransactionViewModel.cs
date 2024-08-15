@@ -10,7 +10,7 @@ public class CreateTransactionViewModel
     public decimal Amount { get; set; }
     public TransportType TransportType { get; set; }
     public DateTime CreatedAt { get; set; }
-    public List<Category> Categories { get; set; } = new List<Category>();
+    public List<TransactionCategory> Categories { get; set; } = new List<TransactionCategory>();
     [Display(Name = "Notes")] 
     public string Description { get; set; } = string.Empty;
 }

@@ -183,6 +183,7 @@ namespace ExpenseTracker.Web.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TransactionType = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TransactionCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -195,6 +196,12 @@ namespace ExpenseTracker.Web.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_TransactionCategories_TransactionCategoryId",
+                        column: x => x.TransactionCategoryId,
+                        principalTable: "TransactionCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -247,6 +254,11 @@ namespace ExpenseTracker.Web.Migrations
                 name: "IX_Transactions_CreatedBy",
                 table: "Transactions",
                 column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_TransactionCategoryId",
+                table: "Transactions",
+                column: "TransactionCategoryId");
         }
 
         /// <inheritdoc />
@@ -268,9 +280,6 @@ namespace ExpenseTracker.Web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TransactionCategories");
-
-            migrationBuilder.DropTable(
                 name: "Transactions");
 
             migrationBuilder.DropTable(
@@ -278,6 +287,9 @@ namespace ExpenseTracker.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "TransactionCategories");
         }
     }
 }

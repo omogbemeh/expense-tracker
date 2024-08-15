@@ -11,4 +11,7 @@ public class Transaction : BaseEntity
     public string CreatedBy { get; set; } = string.Empty;
     [ForeignKey(nameof(CreatedBy))]
     public ApplicationUser? ApplicationUser { get; set; }
+    public Guid TransactionCategoryId { get; set; }
+    public TransactionCategory TransactionCategory { get; set; }
+    
 }

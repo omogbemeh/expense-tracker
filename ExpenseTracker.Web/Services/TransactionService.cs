@@ -1,7 +1,10 @@
+using System.Runtime.InteropServices.JavaScript;
 using ExpenseTracker.Core.Entities;
 using ExpenseTracker.Data;
 using ExpenseTracker.Web.Data;
 using ExpenseTracker.Web.Interfaces;
+using ExpenseTracker.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Web.Services;
@@ -9,10 +12,28 @@ namespace ExpenseTracker.Web.Services;
 public class TransactionService : ITransactionService
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TransactionService(ApplicationDbContext _context)
+    public TransactionService(ApplicationDbContext _context, UserManager<ApplicationUser> userManager)
     {
         this._context = _context;
+        _userManager = userManager;
+    }
+
+    public async Task CreateTransaction(CreateTransactionViewModel createTransactionViewModel)
+    {
+        try
+        {
+            Transaction transaction = new Transaction
+            {
+                Amount = createTransactionViewModel.Amount,
+            };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public async Task<List<Transaction>> GetTransactionsByUserIdAsync(string userId, int days = -7)
@@ -28,7 +49,6 @@ public class TransactionService : ITransactionService
         {
             return new List<Transaction>();
         }
-
     }
 
     public decimal SumTransactions(List<Transaction> transactions)
