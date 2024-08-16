@@ -5,6 +5,7 @@ using ExpenseTracker.Web.Data;
 using ExpenseTracker.Web.Interfaces;
 using ExpenseTracker.Web.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Web.Services;
@@ -20,6 +21,7 @@ public class TransactionService : ITransactionService
         _userManager = userManager;
     }
 
+    [HttpPost]
     public async Task CreateTransaction(CreateTransactionViewModel createTransactionViewModel)
     {
         try
@@ -27,6 +29,7 @@ public class TransactionService : ITransactionService
             Transaction transaction = new Transaction
             {
                 Amount = createTransactionViewModel.Amount,
+                TransactionType = createTransactionViewModel.TransactionType,
             };
         }
         catch (Exception e)
@@ -53,6 +56,6 @@ public class TransactionService : ITransactionService
 
     public decimal SumTransactions(List<Transaction> transactions)
     {
-        return transactions.Count <= 0 ? 0m : transactions.Sum(t => t.TransactionType == TransactionTypeEnum.Credit ? t.Amount : - t.Amount );
+        return transactions.Count <= 0 ? 0m : transactions.Sum(t => t.TransactionType == TransactionType.Credit ? t.Amount : - t.Amount );
     }
 }

@@ -1,6 +1,6 @@
 namespace ExpenseTracker.Data;
 
-public enum TransactionTypeEnum
+public enum TransactionType
 {
     Debit,
     Credit

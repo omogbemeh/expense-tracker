@@ -1,3 +1,4 @@
+@using ExpenseTracker.Data
 @model CreateTransactionViewModel
 
 @{
@@ -10,34 +11,35 @@
         <input type="text">
     </div>
     <div>
-        <label for="">Transaction type</label>
-        <select name="" id="">
+        <label asp-for="TransactionType"></label>
+        <select asp-for="TransactionType" asp-items="Html.GetEnumSelectList<TransactionType>()">
             <option value="">Select a Transaction Type</option>
         </select>
     </div>
+    
     <div>
-        <label for="">Category</label>
-        <select name="" id="">
+        <label asp-for="TransactionCategoryId"></label>
+        <select asp-for="TransactionCategoryId">
             <option value="">Select a Category</option>
-            @if (Model.Categories.Count > 0)
+            @if (Model.Categories?.Count > 0)
             {
                 @foreach (var category in Model.Categories)
                 {
-                <option value=@category.Id>@category.Name</option>
+                <option value="@category.Id">@category.Name</option>
                 }
             }
         </select>
     </div>
     <div>
-        <label for="">Date</label>
-        <input type="date">
+        <label asp-for="CreatedAt"></label>
+        <input asp-for="CreatedAt">
     </div>
     <div>
-        <label for="">Notes</label>
-        <input type="text">
+        <label asp-for="Description"></label>
+        <input asp-for="Description">
     </div>
     <div>
-        <button>Submit</button>
-        <button>Reset form</button>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset form</button>
     </div>
 </form>
