@@ -18,8 +18,12 @@ public class CreateTransactionViewModel
     [Required]
     [Display(Name = "Transaction Category")]
     public Guid TransactionCategoryId { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public List<TransactionCategory> Categories { get; set; } = new List<TransactionCategory>();
+
+    [Display(Name = "Date")]
+    [DataType(DataType.Date)]
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    
+    public List<Core.Entities.TransactionCategory> Categories { get; set; } = new List<Core.Entities.TransactionCategory>();
     [Display(Name = "Notes")] 
     public string Description { get; set; } = string.Empty;
 }

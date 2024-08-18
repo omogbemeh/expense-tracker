@@ -25,10 +25,12 @@
             {
                 @foreach (var category in Model.Categories)
                 {
-                <option value="@category.Id">@category.Name</option>
+                    <option value="@category.Id">@category.Name</option>
                 }
             }
         </select>
+        <a asp-controller="TransactionCategory" asp-action="Create">Add a category</a>
+        
     </div>
     <div>
         <label asp-for="CreatedAt"></label>

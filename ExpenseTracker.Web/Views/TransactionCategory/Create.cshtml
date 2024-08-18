@@ -1,0 +1,43 @@
+@model ExpenseTracker.Web.Models.TransactionCategory.CreateTransactionCategoryViewModel
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+@if (TempData["Success"] != null)
+{
+    <p>@TempData["Success"]</p>
+}
+
+@if (TempData["Error"] != null)
+{
+    <p>@TempData["Error"]</p>
+}
+
+
+<h1>Add Category</h1>
+<form method="post" asp-controller="TransactionCategory" asp-action="Create">
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name">
+        <span asp-validation-for="Name"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Emoji">Emoji</label>
+        <input asp-for="Emoji">
+        <span asp-validation-for="Emoji"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description">
+        <span asp-validation-for="Description"></span>
+    </div>
+    
+    <div>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset form</button>
+        <a hr=""></a>
+    </div>
+</form>

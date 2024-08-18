@@ -21,6 +21,10 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<ApplicationUser>()
             .HasIndex(u => u.UserName)
             .IsUnique();
+
+        builder.Entity<TransactionCategory>()
+            .HasIndex(t => t.Name)
+            .IsUnique();
         
         builder.Entity<Transaction>()
             .Property(t => t.Amount)
