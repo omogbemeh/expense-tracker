@@ -14,27 +14,35 @@ public class TransactionService : ITransactionService
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public TransactionService(ApplicationDbContext _context, UserManager<ApplicationUser> userManager)
+    public TransactionService(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
-        this._context = _context;
+        _context = context;
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     [HttpPost]
-    public async Task CreateTransaction(CreateTransactionViewModel createTransactionViewModel)
+    public async Task CreateAsync(string userId, TransactionCreateViewModel transactionCreateViewModel)
     {
         try
         {
             Transaction transaction = new Transaction
             {
-                Amount = createTransactionViewModel.Amount,
-                TransactionType = createTransactionViewModel.TransactionType,
+                Amount = transactionCreateViewModel.Amount,
+                TransactionType = transactionCreateViewModel.TransactionType,
+                TransactionCategoryId = transactionCreateViewModel.TransactionCategoryId,
+                CreatedAt = transactionCreateViewModel.CreatedAt,
+                CreatedBy = userId,
+                Description = transactionCreateViewModel.Description ?? string.Empty,
             };
+
+            await _context.Transactions.AddAsync(transaction);
+            await _context.SaveChangesAsync();
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -43,9 +51,11 @@ public class TransactionService : ITransactionService
     {
         try
         {
-            var currDayOfWeek = DateTime.UtcNow.DayOfWeek;
-            var duration = DateTime.UtcNow.AddDays(- (int) currDayOfWeek);
-            var transactions = await _context.Transactions.Where(t => t.CreatedBy == userId && t.CreatedAt >= duration).ToListAsync();
+            var currDayOfWeek = DateTime.Now.DayOfWeek;
+            var startOfWeek = DateTime.Now.AddDays(- (int) currDayOfWeek).Date; // This will give you the start of the current week (Sunday)
+            var transactions = await _context.Transactions
+                .Where(t => t.CreatedBy == userId && t.CreatedAt >= startOfWeek)
+                .ToListAsync();
             return transactions;
         }
         catch (Exception e)

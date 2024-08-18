@@ -4,5 +4,5 @@ namespace ExpenseTracker.Web.Services;
 
 public interface ITransactionCategoryService
 {
-    Task Create(CreateTransactionCategoryViewModel createTransactionCategoryViewModel);
+    Task CreateAsync(TransactionCategoryCreateViewModel transactionCategoryCreateViewModel);
 }

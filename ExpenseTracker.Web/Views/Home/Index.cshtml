@@ -9,3 +9,25 @@
     <p>Total transactions this week: @Model.CurrentWeeklyTransaction</p>
     <a asp-controller="Transactions" asp-action="Create">Add Transaction</a>
 </div>
+
+<div>
+    <table>
+        <thead>
+        <th>
+            <td>Date</td>
+            <td>Amount</td>
+            <td>Category</td>
+        </th>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.CreatedAt.ToShortDateString()</td>
+                    <td>$@transaction.Amount</td>
+                    <td>l</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Web.Models.TransactionCategory;
 
-public class CreateTransactionCategoryViewModel
+public class TransactionCategoryCreateViewModel
 {
     [Required(ErrorMessage = "Name cannot be empty")]
     [StringLength(100, ErrorMessage = "Length cannot be more than 100 characters")]

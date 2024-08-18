@@ -32,13 +32,13 @@ public class HomeController : Controller
         try
         {
             var user = await _userManager.GetUserAsync(User);
-
             if (user == null)
             {
                 return RedirectToPage("/Identity/Account/Login");
             }
 
             List<Transaction> transactions = await _transactionService.GetTransactionsByUserIdAsync(user.Id);
+            Console.WriteLine("??****** {0}", transactions.Count);
             decimal sumOfTransactionsForTheWeek = _transactionService.SumTransactions(transactions);
 
             return View(new HomeViewModel

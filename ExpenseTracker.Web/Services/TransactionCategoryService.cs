@@ -15,15 +15,15 @@ public class TransactionCategoryService : ITransactionCategoryService
         _context = context;
         _logger = logger;
     }
-    public async Task Create(CreateTransactionCategoryViewModel createTransactionCategoryViewModel)
+    public async Task CreateAsync(TransactionCategoryCreateViewModel transactionCategoryCreateViewModel)
     {
         try
         {
             TransactionCategory transactionCategory = new TransactionCategory
             {
-                Name = createTransactionCategoryViewModel.Name,
-                Emoji = createTransactionCategoryViewModel.Emoji,
-                Description = createTransactionCategoryViewModel.Description
+                Name = transactionCategoryCreateViewModel.Name,
+                Emoji = transactionCategoryCreateViewModel.Emoji,
+                Description = transactionCategoryCreateViewModel.Description
             };
             await _context.TransactionCategories.AddAsync(transactionCategory);
             await _context.SaveChangesAsync();

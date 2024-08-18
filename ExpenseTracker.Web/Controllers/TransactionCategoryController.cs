@@ -25,22 +25,22 @@ public class TransactionCategoryController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create(CreateTransactionCategoryViewModel createTransactionCategoryViewModel)
+    public async Task<IActionResult> Create(TransactionCategoryCreateViewModel transactionCategoryCreateViewModel)
     {
         try
         {
             if (ModelState.IsValid)
             {
-                await this._transactionCategoryService.Create(createTransactionCategoryViewModel);
-                TempData["Success"] = $"${{Successfully created new Category: {createTransactionCategoryViewModel.Name}}}";
-                return View(new CreateTransactionCategoryViewModel());
+                await this._transactionCategoryService.CreateAsync(transactionCategoryCreateViewModel);
+                TempData["Success"] = $"${{Successfully created new Category: {transactionCategoryCreateViewModel.Name}}}";
+                return View(new TransactionCategoryCreateViewModel());
             }
 
-            return View(createTransactionCategoryViewModel);
+            return View(transactionCategoryCreateViewModel);
         }
         catch (Exception e)
         {
-            TempData["Error"] = $"${{Something went wrong created new Category: {createTransactionCategoryViewModel.Name}}}";
+            TempData["Error"] = $"${{Something went wrong created new Category: {transactionCategoryCreateViewModel.Name}}}";
             return View();
         }
         

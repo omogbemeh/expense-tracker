@@ -1,20 +1,23 @@
 @using ExpenseTracker.Data
-@model CreateTransactionViewModel
+@model TransactionCreateViewModel
 
 @{
 }
 
 <h1>Add Transaction</h1>
-<form action="">
+<form method="post" asp-controller="Transactions" asp-action="Create">
+    <input type="hidden" asp-for="CreatedBy" value="@(User)">
     <div>
-        <label for="">Amount</label>
-        <input type="text">
+        <label asp-for="Amount"></label>
+        <input asp-for="Amount">
+        <span asp-validation-for="Amount"></span>
     </div>
     <div>
         <label asp-for="TransactionType"></label>
         <select asp-for="TransactionType" asp-items="Html.GetEnumSelectList<TransactionType>()">
             <option value="">Select a Transaction Type</option>
         </select>
+        <span asp-validation-for="TransactionType"></span>
     </div>
     
     <div>
@@ -30,15 +33,17 @@
             }
         </select>
         <a asp-controller="TransactionCategory" asp-action="Create">Add a category</a>
-        
+        <span asp-validation-for="TransactionCategoryId"></span>
     </div>
     <div>
         <label asp-for="CreatedAt"></label>
         <input asp-for="CreatedAt">
+        <span asp-validation-for="CreatedAt"></span>
     </div>
     <div>
         <label asp-for="Description"></label>
-        <input asp-for="Description">
+        <input asp-for="Description" type="text" data-val-required="false" value="@Model.Description">
+        <span asp-validation-for="Description"></span>
     </div>
     <div>
         <button type="submit">Submit</button>

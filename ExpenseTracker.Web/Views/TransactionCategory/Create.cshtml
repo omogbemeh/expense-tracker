@@ -1,4 +1,4 @@
-@model ExpenseTracker.Web.Models.TransactionCategory.CreateTransactionCategoryViewModel
+@model ExpenseTracker.Web.Models.TransactionCategory.TransactionCategoryCreateViewModel
 
 @{
     ViewData["Title"] = "Add Category";
@@ -22,19 +22,19 @@
         <input asp-for="Name">
         <span asp-validation-for="Name"></span>
     </div>
-    
+
     <div>
         <label asp-for="Emoji">Emoji</label>
         <input asp-for="Emoji">
         <span asp-validation-for="Emoji"></span>
     </div>
-    
+
     <div>
         <label asp-for="Description">Description</label>
         <input asp-for="Description">
         <span asp-validation-for="Description"></span>
     </div>
-    
+
     <div>
         <button type="submit">Submit</button>
         <button type="reset">Reset form</button>
